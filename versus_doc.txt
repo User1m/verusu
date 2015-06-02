@@ -1,0 +1,11 @@
+Kandy Project:
+Versus
+User 1:
+Username: user1@versus.gmail.com
+Password: 1nisimolestiaeexp1
+User 2:
+Username: user2@versus.gmail.com
+Password: 2eosquiaesse2
+
+API Key: DAK9051d442c74f45cf886a57e64dd6ed38
+API Secret: DASba710dee83334c539b1fde642ce72c09
