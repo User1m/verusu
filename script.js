@@ -62,6 +62,61 @@ $(function(){
     }
   });
 
+  $("#create-game").on('click', function(){
+    /** create(sessionConfig, success, failure) : Void
+    Creates a new session. The creating user is the administrator.
+    @params <object> sessionConfig, <function> success/failure
+    */
+    KandyAPI.Session.create(
+    {
+      session_type: $('#session-type').val(),
+      user_first_name: $('#firstname').val(),
+      user_last_name: $('#lastname').val()
+    },
+    function(result) {
+      // console.log(result);
+      $("#session-info").addClass("hidden");
+      getOpenSessions();
+      KandyAPI.Session.activate(result.session_id);
+      alert('Session Created');
+    },
+    function(msg, code) {
+      alert('Error creating session (' + code + '): ' + msg);
+    }
+    );
+  });
+
+  // Event handler for Get Open Sessions By ID Button
+  $('#search-btn').on('click', function() {
+
+    /** getInfoById(sessionId, success, failure) : Void Gets session details by session ID.
+    @params <string> sessionId
+    */
+    KandyAPI.Session.getInfoById(
+      $('#search-id').val(),
+      function (result) {
+        $('#session-status').text('Session info: ' + JSON.stringify(result));
+      },
+      function (msg, code) {
+        $('#session-status').text('Error getting session info(' + code + '): ' + msg);
+      }
+      );
+  });
+
+
+  function getOpenSessions(){
+    /** getOpenSessionsCreatedByUser(success, failure)
+    Gets a list of all open sessions created by this user.
+    @params <function> success/failure
+    */
+    KandyAPI.Session.getOpenSessionsCreatedByUser(function(result) {
+      loadSessionList(result.sessions);
+    },
+    function(msg, code) {
+      UIState.sessionsunavailable();
+      alert('Error getting session info(' + code + '): ' + msg);
+    });
+  }
 
   // // Event handler for onUserJoinRequest event
   // function onSessionUserJoinRequest(notification) {
