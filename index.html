@@ -6,31 +6,75 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
+  <title>Versus</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel=stylesheet href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/fcs/3.0.1/fcs.js"></script>
+  <script src="https://kandy-portal.s3.amazonaws.com/public/javascript/kandy/2.1.1/kandy.js"></script>
+  <script src="script.js"></script>
 </head>
 <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-            <![endif]-->
 
-            <!-- Add your site or application content here -->
-            <p>Hello world! This is HTML5 Boilerplate.</p>
+  <h1>VERSUS</h1>
+  <h2>Play games against friends as if they were with you!</h2>
 
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+  <!-- <a href="/invite.html" type="button">Invite a friend</a> -->
+  <hr>
+  <div id="login">
+    <p>Log in. Choose your game. And invite a friend to come play.</p>
+    <h3>Login</h3>
+    <input type="text" placeholder="username" id="uname">
+    <input type="test" placeholder="Password" id="pass">
+    <input type="button" value="Login" id="login-btn">
+  </div>
 
-            <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-            <script>
-              (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-                function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-              e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-              e.src='//www.google-analytics.com/analytics.js';
-              r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-              ga('create','UA-XXXXX-X');ga('send','pageview');
-            </script>
-          </body>
-          </html>
+  <div id="content">
+    <div id="logout">
+      <h3>Hello, <strong><span id="current-user">username</span></strong></h3>
+      <input type="button" value="Logout">
+    </div>
+    <hr>
+
+    <div id="session_info">
+
+      <input type="button" id="create-session" value="Create Game Session">
+
+      <input type="button" id='join-session' value="Join A Game">
+
+      <div id="create_info">
+        <h4>Create A Session</h4>
+        <label>Sess Type: </label><input id="session-type" type="text" placeholder="game">
+        <br>
+        <label>FirstName: </label><input id="firstname" type="text" placeholder="Jon">
+        <br>
+        <label>LastName: </label><input id="lastname" type="text" placeholder="Doe">
+        <br>
+        <input type="button" value="Create" id="create-game">
+      </div>
+
+      <div id="join_info">
+        <h4>Search by Game ID</h4>
+        <input type="text" id="search-id" placeholder="de8789039dsd9899899sd676323f">
+        <input type="button" value="Search" id="search-btn">
+      </div>
+      <br>
+      <div id="session-controls">
+        <input type="button" value="Leave Session" id="leave-session">
+        <input type="button" value="Start Session" id="start-session">
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div id="browse-viewer"> </div>
+  </div>
+  <br>
+
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
