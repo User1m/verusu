@@ -1,5 +1,10 @@
 $(function(){
 
+  // window.onload = function(){
+  //   console.log("Loaded");
+  //   UIState.unauthenticated();
+  // };
+
   $(document).ready(function(){
     UIState.unauthenticated();
   });
@@ -9,7 +14,7 @@ $(function(){
   //   'onJoinApprove': onSessionJoinApprove
   // };
 
-  var currentUser, userToken, UIState = {};
+  var currentUser, userToken, gameSession, UIState = {};
 
   $('#login-btn').on('click', function(event){
     event.preventDefault();
@@ -76,9 +81,16 @@ $(function(){
     function(result) {
       // console.log(result);
       $("#session-info").addClass("hidden");
-      getOpenSessions();
+      gameSession = result.session_id;
+      // getOpenSessions();
       KandyAPI.Session.activate(result.session_id);
-      alert('Session Created');
+      emailFriend();
+
+      alert('Session Created. Enable popups to send an email to your friend\'s email');
+
+      $("#session-id").text("Your sessionID is "+gameSession+". Provide this ID to your friend so they can join your game.");
+
+      UIState.sessionavailable();
     },
     function(msg, code) {
       alert('Error creating session (' + code + '): ' + msg);
@@ -103,6 +115,11 @@ $(function(){
       );
   });
 
+
+  function emailFriend(){
+    var emailTo = $("#friends-email").val();
+    window.open("mailto:"+emailTo+"?subject=Join My Game on 'Versus'&body=Hey! It's "+$('#firstname').val() +" "+$('#lastname').val()+", I'd like to invite you to join my "+ $('#session-type').val()+" game on Versus! Login to your Versus account and join my game with this gameID: "+gameSession);
+  }
 
   function getOpenSessions(){
     /** getOpenSessionsCreatedByUser(success, failure)
@@ -148,7 +165,7 @@ $(function(){
 };
 
 UIState.sessionavailable = function(){
-
+  $("#session-controls").removeClass("hidden");
 };
 
 UIState.sessionleft = function(){

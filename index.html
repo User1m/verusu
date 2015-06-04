@@ -20,88 +20,114 @@
   <script src="script.js"></script>
 </head>
 <body>
+
   <div class="jumbotron">
     <div class="container">
       <h1>VERSUS</h1>
       <h2>Play games against friends as if they were with you!</h2>
     </div>
   </div>
+
   <!-- <a href="/invite.html" type="button">Invite a friend</a> -->
   <div class="container">
+
+    <!-- login -->
     <div class="row">
       <div id="login">
         <p>Log in. Choose your game. And invite a friend to come play.</p>
         <h3>Login</h3>
-        <input class="btn btn-default" type="text" placeholder="username" id="uname">
-        <input class="btn btn-default" type="test" placeholder="Password" id="pass">
-        <input class="btn btn-default" type="button" value="Login" id="login-btn">
+        <input class="btn btn-default" type="text" placeholder="username" id="uname" />
+        <input class="btn btn-default" type="test" placeholder="Password" id="pass" />
+        <input class="btn btn-default" type="button" value="Login" id="login-btn" />
       </div>
     </div>
 
-    <div id="content">
+    <div id="content" class="hidden">
+
+      <!-- logout -->
       <div class="row">
         <div id="logout">
           <div class="col-md-6">
             <h3>Hello, <strong><span id="current-user">username</span></strong></h3>
           </div>
           <div class="col-md-6">
-            <input class="btn btn-danger"id="logout-btn" type="button" value="Logout">
+            <input class="btn btn-danger"id="logout-btn" type="button" value="Logout" />
           </div>
         </div>
       </div>
-      <hr>
 
+      <hr/>
 
+      <!-- session-info -->
       <div id="session-info">
-        <div class="row">
-          <div class=" col-md-6">
-            <input class="btn btn-success" type="button" id="create-session" value="Create Game Session">
-          </div>
-          <div class=" col-md-6">
-           <input class="btn btn-success" type="button" id='join-session' value="Join A Game">
-         </div>
-       </div>
 
-       <div class="row">
-        <div class="col-md-6">
-         <div id="create-info">
-           <h4>Create a Session</h4>
-           <input class="btn btn-default" id="session-type" type="text" placeholder="Game Type">
-           <br>
-           <br>
-           <input class="btn btn-default" id="firstname" type="text" placeholder="First Name">
-           <br>
-           <br>
-           <input class="btn btn-default" id="lastname" type="text" placeholder="Last Name">
-           <br>
-           <br>
-           <input class="btn btn-success" type="button" value="Create" id="create-game">
-         </div>
-       </div>
-       <div class="col-md-6">
-         <div id="join-info">
-          <h4>Search by Game ID</h4>
-          <input class="btn btn-default" type="text" id="search-id" placeholder="de8789039dsd9899899sd676323f"/>
-          <input class="btn btn-default" type="button" value="Search" id="search-btn"/>
+        <div class="row">
+          <div class="col-md-6">
+            <input class="btn btn-success" type="button" id="create-session" value="Create Game Session" />
+          </div>
+          <div class="col-md-6">
+            <input class="btn btn-success" type="button" id='join-session' value="Join A Game" />
+          </div>
         </div>
+
+        <!-- create session form -->
+        <div class="row">
+          <div class="col-md-6">
+           <div id="create-info">
+             <h4>Create a Session</h4>
+             <input class="btn btn-default" id="session-type" type="text" placeholder="Game Type" />
+             <br>
+             <br>
+             <input class="btn btn-default" id="firstname" type="text" placeholder="Your First Name" />
+             <br>
+             <br>
+             <input class="btn btn-default" id="lastname" type="text" placeholder="Your Last Name" />
+             <br>
+             <br>
+             <input class="btn btn-default" id="friends-email" type="text" placeholder="Your Friend's email" />
+             <br>
+             <br>
+             <input class="btn btn-success" type="button" value="Invite" id="create-game" />
+           </div>
+         </div>
+
+         <!-- join search -->
+         <div class="col-md-6">
+           <div id="join-info">
+            <h4>Search by Game ID</h4>
+            <input class="btn btn-default" type="text" id="search-id" placeholder="de8789039dsd9899899sd676323f"/>
+            <input class="btn btn-default" type="button" value="Search" id="search-btn"/>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- end session-info -->
+
+    <br>
+    <div class="row">
+      <div id="session-controls">
+        <p id="session-id"></p>
+        <input class="btn btn-danger" type="button" value="Leave Session" id="leave-session" />
+        <input class="btn btn-success" type="button" value="Start Session" id="start-session" />
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div id="browse-viewer"> </div>
+    </div>
+
+    <div class="row">
+      <div id="games">
+
       </div>
     </div>
   </div>
-
   <br>
 
-  <div id="session-controls">
-    <input class="btn btn-danger" type="button" value="Leave Session" id="leave-session">
-    <input class="btn btn-success" type="button" value="Start Session" id="start-session">
-  </div>
+</div> <!-- container -->
 
-
-  <hr>
-
-  <div id="browse-viewer"> </div>
-</div>
-<br>
-</div>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 </body>
 </html>
