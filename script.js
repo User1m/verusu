@@ -9,7 +9,7 @@ $(function(){
   //   'onJoinApprove': onSessionJoinApprove
   // };
 
-  var currentUser, UIState = {};
+  var currentUser, userToken, UIState = {};
 
   $('#login-btn').on('click', function(event){
     event.preventDefault();
@@ -24,11 +24,10 @@ $(function(){
       username,
       password,
       function(results) {
-
-        console.log("Results: "+ results);
-        console.log("ID: "+ results.full_user_id);
-
-        $('#username').text(results.full_user_id);
+        // console.log(results);
+        // console.log("ID: "+ results.full_user_id);
+        userToken = results.user_access_token;
+        // $('#username').text(results.full_user_id);
         UIState.authenticated();
         UIState.sessionunavailable();
       },
