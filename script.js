@@ -36,6 +36,16 @@ $(function(){
       });
   });
 
+
+  $('#logout-btn').on('click', function(event){
+    event.preventDefault();
+      /** logout()
+      logs user out of Kandy Platform
+      */
+      KandyAPI.logout();
+      UIState.unauthenticated();
+    });
+
   $("#create-session").on('click', function(){
     $("#create-info").removeClass("hidden");
 
@@ -69,36 +79,38 @@ $(function(){
   };
 
   UIState.unauthenticated = function(){
-    $("#login").removeClass("hidden");
-    $("#content").addClass("hidden");
-    $("#current-user").text("username");
-  };
+   // $("#uname").text("");
+   // $("#pass").text("");
+   $("#login").removeClass("hidden");
+   $("#content").addClass("hidden");
+   $("#current-user").text("username");
+ };
 
-  UIState.sessionunavailable = function(){
-    $("#create-info").addClass("hidden");
-    $("#join-info").addClass("hidden");
-    $("#session-controls").addClass("hidden");
-  };
+ UIState.sessionunavailable = function(){
+  $("#create-info").addClass("hidden");
+  $("#join-info").addClass("hidden");
+  $("#session-controls").addClass("hidden");
+};
 
-  UIState.sessionavailable = function(){
+UIState.sessionavailable = function(){
 
-  };
+};
 
-  UIState.sessionleft = function(){
+UIState.sessionleft = function(){
 
-  };
+};
 
-  UIState.sessionjoin = function(){
+UIState.sessionjoin = function(){
 
-  };
+};
 
-  UIState.cobrowsingstarted = function(){
+UIState.cobrowsingstarted = function(){
 
-  };
+};
 
-  UIState.cobrowsingstopped = function(){
+UIState.cobrowsingstopped = function(){
 
-  };
+};
 
 
 
