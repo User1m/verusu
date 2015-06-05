@@ -1,3 +1,5 @@
+var currentUser, userToken, gameSession, createOrJoin, UIState = {};
+
 $(function(){
 
   // window.onload = function(){
@@ -13,8 +15,6 @@ $(function(){
   //   'onUserJoinRequest': onSessionUserJoinRequest,
   //   'onJoinApprove': onSessionJoinApprove
   // };
-
-  var currentUser, userToken, gameSession, UIState = {};
 
   $('#login-btn').on('click', function(event){
     event.preventDefault();
@@ -72,6 +72,8 @@ $(function(){
     Creates a new session. The creating user is the administrator.
     @params <object> sessionConfig, <function> success/failure
     */
+    createOrJoin = 1;
+
     KandyAPI.Session.create(
     {
       session_type: $('#session-type').val(),
@@ -81,16 +83,17 @@ $(function(){
     function(result) {
       // console.log(result);
       $("#session-info").addClass("hidden");
+
       gameSession = result.session_id;
       // getOpenSessions();
       KandyAPI.Session.activate(result.session_id);
       emailFriend();
 
-      alert('Session Created. Enable popups to send an email to your friend\'s email');
-
       $("#session-id").text("Your sessionID is "+gameSession+". Provide this ID to your friend so they can join your game.");
 
       UIState.sessionavailable();
+
+      alert('Session Created. Enable popups to send an email to your friend\'s email');
     },
     function(msg, code) {
       alert('Error creating session (' + code + '): ' + msg);
@@ -104,6 +107,8 @@ $(function(){
     /** getInfoById(sessionId, success, failure) : Void Gets session details by session ID.
     @params <string> sessionId
     */
+    createOrJoin = 2;
+
     KandyAPI.Session.getInfoById(
       $('#search-id').val(),
       function (result) {
@@ -142,7 +147,25 @@ $(function(){
   //   KandyAPI.Session.acceptJoinRequest(notification.session_id, notification.full_user_id);
   // }
 
+  $("#start-session").on('click', function(){
+    KandyAPI.CoBrowse.startBrowsingUser(gameSession);
+    UIState.cobrowsingstarted();
+  });
 
+  $('#leave-session').on('click', function() {
+    KandyAPI.CoBrowse.stopBrowsingUser();
+
+    KandyAPI.Session.terminate(
+      gameSession,
+      function () {
+        UIState.cobrowsingstopped(); 
+        alert('Session Ended');
+      },
+      function (msg, code) {
+        alert('Error deleting session (' + code + '): ' + msg);
+      }
+      );
+  });
 
   UIState.authenticated = function(){
     $("#login").addClass("hidden");
@@ -162,26 +185,41 @@ $(function(){
   $("#create-info").addClass("hidden");
   $("#join-info").addClass("hidden");
   $("#session-controls").addClass("hidden");
+  $("#browse-game-section").addClass("hidden");
 };
 
 UIState.sessionavailable = function(){
+  $("#leave-session").addClass("hidden");
   $("#session-controls").removeClass("hidden");
 };
 
-UIState.sessionleft = function(){
-
-};
+// UIState.sessionleft = function(){
+// };
 
 UIState.sessionjoin = function(){
 
 };
 
 UIState.cobrowsingstarted = function(){
+  $("#start-session").addClass("hidden");
+  $("#leave-session").removeClass("hidden");
+  $("#browse-game-section").removeClass("hidden");
 
+  if(createOrJoin == 1){  //create
+    $("#browse-viewer").addClass("hidden");
+    $("#games").removeClass("hidden");
+  }else{ //join
+    $("#games").addClass("hidden");
+    $("#browse-viewer").removeClass("hidden");
+  }
 };
 
 UIState.cobrowsingstopped = function(){
-
+  $("#session-info").removeClass("hidden");
+  $("#session-controls").addClass("hidden");
+  $("#browse-game-section").addClass("hidden");
+  UIState.sessionunavailable();
+  UIState.authenticated();
 };
 
 
